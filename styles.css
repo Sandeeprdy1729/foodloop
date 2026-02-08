@@ -1,0 +1,248 @@
+body {
+    font-family: Arial,  sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+    color: #333;
+}
+h1 {
+    text-align: center;
+    
+}
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    padding: 10px 20px;
+    color: white;
+
+}
+nav .logo {
+    font-size: 28px;
+    font-weight: bold;
+}
+nav ul {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+    
+}
+nav ul li a {
+    color: white;
+    text-decoration: none;
+}
+.hero {
+     text-align: center;
+     padding: 100px 20px;
+     background-color: #4CAF50;
+     color: white;
+}
+.hero h1 {
+    font-size: 48px;
+    margin-bottom: 20px;
+}
+.hero p {
+    font-size: 18px;
+    margin-bottom: 30px;
+}
+.hero button {
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    background-color: white;
+    font-family:sans-serif;
+    color: rgb(12, 101, 8);
+    border: none;
+    cursor: pointer;
+    border-radius: 15px;
+    border-color: none;
+
+}
+.donation-form, .marketplace,.impact {
+    padding: 50px 20px;
+    text-align: center;
+}
+.donation-form form {
+    max-width: 400px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.donation-form input, .donation-form button {
+    padding: 10px;
+    font-size: 16px;
+}
+.marketplace .product-grid {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+.marketplace .product-card {
+    background-color: white;
+    padding: 10px 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 200px;
+    text-align: center;
+}
+.product-card img {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+}
+.product-card button {
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+footer {
+    text-align: center;
+    padding: 20px;
+    background-color: #333;
+    color: white;
+
+}
+header {
+    background-color: #4CAF50;
+    color: white;
+    padding: 20px;
+    text-align: center;
+}
+
+#map {
+    height: 400px;
+    width: 100%;
+    margin-bottom: 20px;
+  }
+  .dashboard {
+    display: flex;
+    justify-content: space-around;
+    background-color: #f4f4f4;
+    padding: 20px;
+    margin-bottom: 20px;
+  }
+  .dashboard-item {
+    text-align: center;
+  }
+  .dashboard-item h3 {
+    margin: 0;
+    font-size: 24px;
+  }
+  .dashboard-item p {
+    margin: 5px 0 0;
+    color: #555;
+  }
+
+  .dashboard .product-grid {
+    display: flex;
+    justify-content: center;
+    gap: 70px;
+    flex-wrap: wrap;
+}
+.dashboard .product-card {
+    background-color: white;
+    padding: 10px 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 200px;
+    text-align: center;
+}
+.product-card img {
+    width: 100%;
+    height:auto;
+    border-radius: 10px;
+}
+
+.search-filter {
+    margin-bottom: 20px;
+
+}
+.search-filter input, .search-filter select ,.search-filter button {
+    padding: 10px;
+    margin-right: 10px;
+    font-size: 16px;
+}
+
+/* Graph Container */
+.graph-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Graph Bars */
+  .graph {
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-end;
+    height: 300px;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+  }
+  
+  .bar {
+    width: 20%;
+    background-color: #4CAF50;
+    border-radius: 5px 5px 0 0;
+    position: relative;
+    animation: grow 2s ease-out forwards;
+    transform-origin: bottom;
+  }
+  
+  @keyframes grow {
+    from {
+      transform: scaleY(0);
+    }
+    to {
+      transform: scaleY(1);
+    }
+  }
+  
+  .bar::after {
+    content: attr(data-label);
+    position: absolute;
+    bottom: -30px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 14px;
+    color: #333;
+    text-align: center;
+    white-space: nowrap;
+  }
+  
+  .bar::before {
+    content: attr(data-value);
+    position: absolute;
+    top: -25px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 14px;
+    color: #333;
+    font-weight: bold;
+  }
+
+  .bar:hover {
+    opacity: 0.8;
+    cursor: pointer;
+  }
+  
+  .bar:hover::before {
+    content: attr(data-value) " " attr(data-label);
+    background-color: rgba(0, 0, 0, 0.8);
+    color: #fff;
+    padding: 5px;
+    border-radius: 5px;
+    top: -40px;
+  }
+
+  

@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Farmer's Market</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <nav>
+        <div class="logo">FoodLoop</div>
+        <ul>
+            <li><a href="indexh.html">Home</a></li>
+            <li><a href="donate.html">Donate</a></li>
+            <li><a href="market.html">Marketplace</a></li>
+            <li><a href="farmer.html"></a>Farmer's Market</li>
+            <li><a href="recipients.html">Find Recipients</a></li>
+        </ul>
+    </nav>
+    <header>
+        <h1>Farmer's Market</h1>
+        <p>Buy fresh produce directly from farmers at prices lower than the market! </p>
+    </header>
+    <div class="search-filter">
+        <input type="text" id="search" placeholder="search for vegetables...">
+        <select id="category">
+            <option value="">All Categories</option>
+            <option value="Tomaato">Tomatoes</option>
+            <option value="Potato">Potatoes</option>
+            <option value="Spinach">Spinach</option>
+            <option value="greenleaves">Green leaves</option>
+            <option value="onion">Onions</option>
+        </select>
+        <input type="number" id="maxprice" placeholder="Max Price (₹)" >
+        <button onclick="filterVegetables()">Apply Filters</button>
+    </div>
+    <section id="marketplace" class="marketplace">
+        <div class="product-grid">
+            <div class="product-card">
+              <img src="tomato.jpg" alt="Vegetables">
+              <h3>Fresh Tomatoes</h3>
+              <p>Price: ₹20/kg (Market Price:₹30/kg)</p>
+              <p>Quantity Available: 100kg</p>
+              <button>Contact Farmer </button>
+            </div>
+
+            <div class="product-card">
+              <img src="potato.jpg" alt="Vegetables">
+              <h3>Organic Potatoes</h3>
+              <p>Price: ₹15/kg (Market Price:₹25/kg)</p>
+              <p>Quantity Available: 50kg</p>
+              <button>Contact Farmer</button>
+            </div>
+
+            <div class="product-card">
+                <img src="spinach.jpeg" alt="Vegetables">
+                <h3>Spinach</h3>
+                <p>Price: ₹25/kg (Market Price:₹45/kg)</p>
+                <p>Quantity Available: 20kg</p>
+                <button>Contact Farmer</button>
+            </div>
+
+            <div class="product-card">
+                <img src="onion.jpeg" alt="Vegetables">
+                <h3>Onions</h3>
+                <p>Price: ₹30/kg (Market Price:₹40/kg)</p>
+                <p>Quantity Available: 70kg</p>
+                <button>Contact Farmer</button>
+            </div>
+            
+            <div class="product-card">
+                <img src="l finger.jpg" alt="Vegetables">
+                <h3>Okra</h3>
+                <p>Price: ₹35/kg (Market Price:₹60/kg)</p>
+                <p>Quantity Available: 90kg</p>
+                <button>Contact Farmer</button>
+            </div>
+            <div class="product-card">
+                <img src="c flower.jpeg" alt="Vegetables">
+                <h3>CauliFlower</h3>
+                <p>Price: ₹10/kg (Market Price:₹25/kg)</p>
+                <p>Quantity Available: 35kg</p>
+                <button>Contact Farmer</button>
+            </div>
+            <div class="product-card">
+                <img src="brinjal.jpeg" alt="Vegetables">
+                <h3>Brinjal</h3>
+                <p>Price: ₹40/kg (Market Price:₹50/kg)</p>
+                <p>Quantity Available: 60kg</p>
+                <button>Contact Farmer</button>
+            </div>
+            <div class="product-card">
+                <img src="cabbage.webp" alt="Vegetables">
+                <h3>Cabbage</h3>
+                <p>Price: ₹30/kg (Market Price:₹45/kg)</p>
+                <p>Quantity Available: 80kg</p>
+                <button>Contact Farmer</button>
+            </div>
+          </div>
+    </section>
+</body>
+</html>

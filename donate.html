@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Donation</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    
+    <nav>
+        <div class="logo">FoodLoop</div>
+        <ul>
+            <li><a href="indexh.html">Home</a></li>
+            <li><a href="donate.html">Donate</a></li>
+            <li><a href="market.html">Marketplace</a></li>
+            <li><a href="farmer.html">Farmer's Market</a></li>
+            <li><a href="recipients.html">Find Recipients</a></li>
+        </ul>
+    </nav>
+    <header>
+        <h1>Donate surplus Food</h1>
+        <p>Connecting excess food with those in need</p>
+    </header>
+    <main>
+        <section id="donate" class="donation-form">
+            <form id="foodDonationform">
+                <label for="name" >Your Name:</label>
+                <input type="text" id="name" name="name" placeholder="Enter Your name"required>
+
+                <label for="foodType">Food Type:</label>
+                <input type="text" id="foodType" name="foodType" placeholder="e.g,fruits, bread" required>
+
+                <label for="quantity" >Quantity (kg):</label>
+                <input type="number" id="quantity" name="quantity" placeholder="e.g,1kg,2.7kg"required>
+
+                <label for="location" >Location:</label>
+                <input type="text" id="location" name="location" placeholder="Delhi Hyderabad"required>
+
+                <label for="expiry">Expiry:</label>
+                <input type="date" id="expiry" name="expiry" placeholder="Enter Exp date" required>
+
+                <button type="submit">Submit Donation</button>
+            </form>
+        </section>
+
+    </main>
+    <footer>
+        <p>&copy; 2025 Food Donation. All rights recevied</p>
+    </footer>
+</body>
+</html>

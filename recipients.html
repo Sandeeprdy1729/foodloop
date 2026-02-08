@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <title>Find Recipients</title>
+</head>
+<body>
+    
+    <nav>
+        <div class="logo">FoodLoop</div>
+        <ul>
+                <li><a href="indexh.html">Home</a></li>
+                <li><a href="donate.html">Donate</a></li>
+                <li><a href="market.html">Marketplace</a></li>
+                <li><a href="farmer.html">Farmer's Market</a></li>
+                <li><a href="recipients.html">Find Recipients</a></li>
+        </ul>
+    </nav>
+    <header>
+        <h1>Find Recipients</h1>
+        <p>List of nearby NGO'S and Shelters</p>
+    </header>
+
+    <main>
+        
+        <section class="dashboard">
+          <div class="dashboard-item">
+            <h3 id="ngos-count">0</h3>
+            <p>NGOs Connected</p>
+          </div>
+          <div class="dashboard-item">
+            <h3 id="restaurants-count">0</h3>
+            <p>Registered Restaurants</p>
+          </div>
+          <div class="dashboard-item">
+            <h3 id="volunteers-count">0</h3>
+            <p>Active Volunteers</p>
+          </div>
+          <div class="dashboard-item">
+            <h3 id="meals-saved">0</h3>
+            <p>Meals Saved Today</p>
+          </div>
+        </section>
+    
+        <section>
+          <h2>Nearby Recipients</h2>
+          <div id="map"></div>
+        </section>
+
+        <section>
+            <h2>Recipients Near You</h2>
+            <ul id="recipients-list">
+                <!--RECIPIENTS dynamically added-->
+
+            </ul>
+
+        <section>
+          <h2>Recipients List</h2>
+          <ul id="recipient-list">
+            <!-- Recipients will be dynamically added here -->
+          </ul>
+        </section>
+      </main>
+    <main>
+        
+         
+        </section>
+
+        <footer>
+            <p>&copy; 2025 Find Recipients All rights recevied.</p>
+        </footer>
+    </main>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script>
+    
+    const recipients = [
+      { name: 'Community Shelter', type: 'NGO', location: [12.9716, 77.5946] },
+      { name: 'Food Bank NGO', type: 'NGO', location: [12.9352, 77.6245] },
+      { name: 'Local Kitchen', type: 'Restaurant', location: [12.9569, 77.5768] },
+      { name: 'Helping Hands', type: 'Volunteer Group', location: [12.9418, 77.5647] },
+    ];
+
+    
+    const map = L.map('map').setView([12.9716, 77.5946], 12); // Default center (e.g., Bangalore)
+
+    
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+    }).addTo(map);
+
+    
+    recipients.forEach(recipient => {
+      const marker = L.marker(recipient.location).addTo(map);
+      marker.bindPopup(`<strong>${recipient.name}</strong><br>Type: ${recipient.type}`);
+    });
+
+    
+    function updateDashboard() {
+      const ngos = recipients.filter(r => r.type === 'NGO').length;
+      const restaurants = recipients.filter(r => r.type === 'Restaurant').length;
+      const volunteers = recipients.filter(r => r.type === 'Volunteer Group').length;
+      const mealsSaved = 120; // Example data (can be fetched from backend)
+
+      document.getElementById('ngos-count').textContent = ngos;
+      document.getElementById('restaurants-count').textContent = restaurants;
+      document.getElementById('volunteers-count').textContent = volunteers;
+      document.getElementById('meals-saved').textContent = mealsSaved;
+    }
+
+    
+    function displayRecipients() {
+      const recipientList = document.getElementById('recipient-list');
+      recipients.forEach(recipient => {
+        const li = document.createElement('li');
+        li.innerHTML = `<strong>${recipient.name}</strong><br>Type: ${recipient.type}`;
+        recipientList.appendChild(li);
+      });
+    }
+
+
+    updateDashboard();
+    displayRecipients();
+  </script>
+</body>
+</html>
