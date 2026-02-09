@@ -1,0 +1,195 @@
+.orders-container {
+  min-height: 100vh;
+  background: #f5f5f5;
+}
+
+.orders-header {
+  background: linear-gradient(135deg, #2e7d32 0%, #1b5e20 100%);
+  color: white;
+  padding: 30px;
+  text-align: center;
+}
+
+.orders-header h1 {
+  margin: 0;
+  font-size: 2rem;
+}
+
+.orders-content {
+  max-width: 1000px;
+  margin: 30px auto;
+  padding: 0 20px;
+}
+
+.loading,
+.no-orders {
+  background: white;
+  border-radius: 8px;
+  padding: 50px;
+  text-align: center;
+  color: #666;
+  font-size: 1.1rem;
+}
+
+.no-orders a {
+  display: inline-block;
+  margin-top: 15px;
+  background: #2e7d32;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 4px;
+  text-decoration: none;
+  transition: background 0.3s;
+}
+
+.no-orders a:hover {
+  background: #1b5e20;
+}
+
+.orders-list {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.order-card {
+  background: white;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s;
+  cursor: pointer;
+}
+
+.order-card:hover {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.order-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 20px;
+  border-bottom: 1px solid #f0f0f0;
+  background: #f9f9f9;
+}
+
+.order-id {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.order-id strong {
+  color: #333;
+  font-size: 1.05rem;
+}
+
+.order-date {
+  color: #999;
+  font-size: 0.85rem;
+}
+
+.order-status {
+  padding: 6px 12px;
+  border-radius: 20px;
+  color: white;
+  font-weight: bold;
+  font-size: 0.85rem;
+}
+
+.order-summary {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  padding: 15px 20px;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.order-summary .label {
+  color: #999;
+  font-size: 0.85rem;
+  margin: 0 0 5px 0;
+}
+
+.order-summary .value {
+  color: #333;
+  font-weight: bold;
+  margin: 0;
+}
+
+.order-details {
+  padding: 20px;
+  background: #fafafa;
+}
+
+.order-details h4 {
+  margin: 0 0 12px 0;
+  color: #333;
+  font-size: 1rem;
+}
+
+.order-details h4:not(:first-child) {
+  margin-top: 20px;
+}
+
+.items-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+}
+
+.items-table th {
+  background: white;
+  padding: 10px;
+  text-align: left;
+  border-bottom: 2px solid #ddd;
+  font-weight: bold;
+  color: #555;
+}
+
+.items-table td {
+  padding: 10px;
+  border-bottom: 1px solid #eee;
+  color: #666;
+}
+
+.items-table tr:last-child td {
+  border-bottom: none;
+}
+
+.delivery-info,
+.payment-info {
+  background: white;
+  padding: 12px;
+  border-radius: 4px;
+  border-left: 4px solid #2e7d32;
+}
+
+.delivery-info p,
+.payment-info p {
+  margin: 8px 0;
+  color: #666;
+}
+
+@media (max-width: 768px) {
+  .order-header {
+    flex-direction: column;
+    gap: 10px;
+    align-items: flex-start;
+  }
+
+  .order-summary {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
+  .items-table {
+    font-size: 0.9rem;
+  }
+
+  .items-table th,
+  .items-table td {
+    padding: 8px;
+  }
+}
