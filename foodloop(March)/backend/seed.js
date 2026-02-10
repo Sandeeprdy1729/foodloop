@@ -216,13 +216,22 @@ const seedDatabase = async () => {
     await Product.deleteMany({});
     console.log('🗑️  Cleared existing data');
 
+    // Hash password for all farmers
+    const bcrypt = require('bcryptjs');
+    const hashedPassword = await bcrypt.hash('password123', 10);
+
+    const farmersWithPasswords = farmers.map(f => ({
+      ...f,
+      password: hashedPassword
+    }));
+
     // Insert farmers
-    const insertedFarmers = await Farmer.insertMany(farmers);
+    const insertedFarmers = await Farmer.insertMany(farmersWithPasswords);
     console.log(`✅ Added ${insertedFarmers.length} farmers`);
 
     // Assign farmer IDs to products and insert
     const productsWithFarmers = [];
-    
+
     // Rajesh's products (first 3)
     for (let i = 0; i < 3; i++) {
       productsWithFarmers.push({
@@ -230,7 +239,7 @@ const seedDatabase = async () => {
         farmerId: insertedFarmers[0]._id
       });
     }
-    
+
     // Priya's products (next 2)
     for (let i = 3; i < 5; i++) {
       productsWithFarmers.push({
@@ -238,7 +247,7 @@ const seedDatabase = async () => {
         farmerId: insertedFarmers[1]._id
       });
     }
-    
+
     // Arjun's products (last 3)
     for (let i = 5; i < 8; i++) {
       productsWithFarmers.push({

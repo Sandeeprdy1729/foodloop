@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import ProductCard from '../components/ProductCard';
 import Cart from '../components/Cart';
+import NotificationBell from '../components/NotificationBell';
 import './BuyerDashboard.css';
 
 const BuyerDashboard = () => {
@@ -76,19 +77,22 @@ const BuyerDashboard = () => {
       <header className="dashboard-header">
         <h1>🌾 FoodLoop - Buyer Portal</h1>
         <p>Fresh produce directly from farmers to your mart</p>
-        <button 
-          className="cart-toggle"
-          onClick={() => setShowCart(!showCart)}
-        >
-          🛒 Cart ({cart.length})
-        </button>
+        <div className="header-controls">
+          <NotificationBell />
+          <button
+            className="cart-toggle"
+            onClick={() => setShowCart(!showCart)}
+          >
+            🛒 Cart ({cart.length})
+          </button>
+        </div>
       </header>
 
       <div className="dashboard-content">
         {/* Filters */}
         <aside className="filters-panel">
           <h3>Filters</h3>
-          
+
           <div className="filter-group">
             <label>Search Product</label>
             <input
@@ -124,7 +128,7 @@ const BuyerDashboard = () => {
             />
           </div>
 
-          <button 
+          <button
             className="reset-filters"
             onClick={() => setFilters({ category: '', search: '', maxPrice: '' })}
           >

@@ -1,6 +1,9 @@
 const Order = require('../models/Order');
 const Product = require('../models/Product');
 const Buyer = require('../models/Buyer');
+const Farmer = require('../models/Farmer');
+const Notification = require('../models/Notification');
+const { sendNotification } = require('../utils/socket');
 
 // Create order
 exports.createOrder = async (req, res) => {
@@ -65,9 +68,35 @@ exports.createOrder = async (req, res) => {
 
     // Update buyer info
     await Buyer.findByIdAndUpdate(buyerId, {
-      totalPurchases: 1,
-      $inc: { totalSpent: totalAmount }
+      $inc: {
+        totalPurchases: 1,
+        totalSpent: totalAmount
+      }
     });
+
+    // Update farmer info
+    await Farmer.findByIdAndUpdate(farmerId, {
+      $inc: { totalOrders: 1 }
+    });
+
+    // Send Notification to Farmer
+    try {
+      const notification = new Notification({
+        recipient: farmerId,
+        recipientModel: 'Farmer',
+        type: 'NEW_ORDER',
+        title: 'New Order Received! 📦',
+        message: `You have received a new order (${order.orderId}) from ${order.buyerId?.businessName || 'a buyer'}.`,
+        metadata: {
+          orderId: order._id,
+          externalId: order.orderId
+        }
+      });
+      await notification.save();
+      sendNotification(farmerId, 'Farmer', 'NEW_ORDER', notification);
+    } catch (notifError) {
+      console.error('Error sending farmer notification:', notifError);
+    }
 
     res.status(201).json({
       success: true,

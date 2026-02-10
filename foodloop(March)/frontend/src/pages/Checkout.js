@@ -23,12 +23,30 @@ const Checkout = () => {
     if (data) {
       setCartData(JSON.parse(data));
     }
+
+    // Load buyer info if logged in
+    const savedBuyer = localStorage.getItem('buyerInfo');
+    if (savedBuyer) {
+      try {
+        const parsedBuyer = JSON.parse(savedBuyer);
+        setBuyerInfo(prev => ({
+          ...prev,
+          ...parsedBuyer,
+          address: parsedBuyer.address || '',
+          city: parsedBuyer.city || '',
+          state: parsedBuyer.state || ''
+        }));
+      } catch (e) {
+        console.error('Error parsing saved buyer info', e);
+      }
+    }
   }, []);
 
   const calculateTotal = () => {
     if (!cartData) return 0;
     return cartData.items.reduce((total, item) => {
-      return total + (item.pricePerUnit * (cartData.quantities[item._id] || 1));
+      const qty = cartData.quantities[item._id] || 1;
+      return total + (item.pricePerUnit * qty);
     }, 0).toFixed(2);
   };
 
@@ -37,23 +55,28 @@ const Checkout = () => {
     setLoading(true);
 
     try {
-      // Create buyer first
+      // Create or Update buyer (deduplicated by email in the backend)
       const buyerResponse = await axios.post(
         `${process.env.REACT_APP_API_URL}/buyers`,
         buyerInfo
       );
       const buyerId = buyerResponse.data.data._id;
 
+      // Update local buyer info if needed
+      if (localStorage.getItem('buyerInfo')) {
+        localStorage.setItem('buyerInfo', JSON.stringify(buyerResponse.data.data));
+      }
+
       // Group items by farmer
       const ordersByFarmer = {};
       cartData.items.forEach(item => {
-        const farmerId = item.farmerId._id;
+        const farmerId = item.farmerId._id || item.farmerId; // Handle both populated and unpopulated
         if (!ordersByFarmer[farmerId]) {
           ordersByFarmer[farmerId] = [];
         }
         ordersByFarmer[farmerId].push({
           productId: item._id,
-          quantity: cartData.quantities[item._id]
+          quantity: cartData.quantities[item._id] || 1
         });
       });
 
@@ -76,7 +99,7 @@ const Checkout = () => {
             totalAmount,
             deliveryType: 'Delivery',
             address: buyerInfo.address,
-            notes: ''
+            notes: `Payment Method: ${paymentMethod}`
           }
         );
       }
@@ -88,7 +111,7 @@ const Checkout = () => {
       }, 2000);
     } catch (error) {
       console.error('Error placing order:', error);
-      alert('Error placing order. Please try again.');
+      alert(error.response?.data?.message || 'Error placing order. Please try again.');
     } finally {
       setLoading(false);
     }
@@ -165,7 +188,7 @@ const Checkout = () => {
               <input
                 type="text"
                 value={buyerInfo.name}
-                onChange={(e) => setBuyerInfo({...buyerInfo, name: e.target.value})}
+                onChange={(e) => setBuyerInfo({ ...buyerInfo, name: e.target.value })}
                 required
               />
             </div>
@@ -175,7 +198,7 @@ const Checkout = () => {
               <input
                 type="text"
                 value={buyerInfo.businessName}
-                onChange={(e) => setBuyerInfo({...buyerInfo, businessName: e.target.value})}
+                onChange={(e) => setBuyerInfo({ ...buyerInfo, businessName: e.target.value })}
                 required
               />
             </div>
@@ -184,7 +207,7 @@ const Checkout = () => {
               <label>Business Type *</label>
               <select
                 value={buyerInfo.businessType}
-                onChange={(e) => setBuyerInfo({...buyerInfo, businessType: e.target.value})}
+                onChange={(e) => setBuyerInfo({ ...buyerInfo, businessType: e.target.value })}
               >
                 <option value="Retail Mart">Retail Mart</option>
                 <option value="Supermarket">Supermarket</option>
@@ -200,7 +223,7 @@ const Checkout = () => {
                 <input
                   type="email"
                   value={buyerInfo.email}
-                  onChange={(e) => setBuyerInfo({...buyerInfo, email: e.target.value})}
+                  onChange={(e) => setBuyerInfo({ ...buyerInfo, email: e.target.value })}
                   required
                 />
               </div>
@@ -209,7 +232,7 @@ const Checkout = () => {
                 <input
                   type="tel"
                   value={buyerInfo.phone}
-                  onChange={(e) => setBuyerInfo({...buyerInfo, phone: e.target.value})}
+                  onChange={(e) => setBuyerInfo({ ...buyerInfo, phone: e.target.value })}
                   required
                 />
               </div>
@@ -220,7 +243,7 @@ const Checkout = () => {
               <input
                 type="text"
                 value={buyerInfo.address}
-                onChange={(e) => setBuyerInfo({...buyerInfo, address: e.target.value})}
+                onChange={(e) => setBuyerInfo({ ...buyerInfo, address: e.target.value })}
                 required
               />
             </div>
@@ -231,7 +254,7 @@ const Checkout = () => {
                 <input
                   type="text"
                   value={buyerInfo.city}
-                  onChange={(e) => setBuyerInfo({...buyerInfo, city: e.target.value})}
+                  onChange={(e) => setBuyerInfo({ ...buyerInfo, city: e.target.value })}
                   required
                 />
               </div>
@@ -240,13 +263,13 @@ const Checkout = () => {
                 <input
                   type="text"
                   value={buyerInfo.state}
-                  onChange={(e) => setBuyerInfo({...buyerInfo, state: e.target.value})}
+                  onChange={(e) => setBuyerInfo({ ...buyerInfo, state: e.target.value })}
                   required
                 />
               </div>
             </div>
 
-            <h3 style={{marginTop: '25px'}}>Payment Method</h3>
+            <h3 style={{ marginTop: '25px' }}>Payment Method</h3>
 
             <div className="payment-options">
               {['Bank Transfer', 'UPI', 'Card', 'Cash on Delivery'].map(method => (
@@ -262,8 +285,8 @@ const Checkout = () => {
               ))}
             </div>
 
-            <button 
-              type="submit" 
+            <button
+              type="submit"
               className="place-order-btn"
               disabled={loading}
             >

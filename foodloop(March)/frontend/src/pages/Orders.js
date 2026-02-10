@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import NotificationBell from '../components/NotificationBell';
 import './Orders.css';
 
 const Orders = () => {
@@ -13,9 +13,11 @@ const Orders = () => {
 
   const fetchOrders = async () => {
     try {
-      // For demo, fetch all orders (in real app, you'd get buyer ID from auth)
+      const buyerInfo = localStorage.getItem('buyerInfo');
+      const buyerId = buyerInfo ? JSON.parse(buyerInfo)._id : 'demo-buyer-id';
+
       const response = await axios.get(
-        `${process.env.REACT_APP_API_URL}/orders/buyer/demo-buyer-id`
+        `${process.env.REACT_APP_API_URL}/orders/buyer/${buyerId}`
       );
       setOrders(response.data.data || []);
     } catch (error) {
@@ -42,6 +44,7 @@ const Orders = () => {
     <div className="orders-container">
       <header className="orders-header">
         <h1>📦 My Orders</h1>
+        <NotificationBell />
       </header>
 
       <div className="orders-content">
@@ -55,8 +58,8 @@ const Orders = () => {
         ) : (
           <div className="orders-list">
             {orders.map(order => (
-              <div 
-                key={order._id} 
+              <div
+                key={order._id}
                 className="order-card"
                 onClick={() => setSelectedOrder(selectedOrder?._id === order._id ? null : order)}
               >
@@ -67,7 +70,7 @@ const Orders = () => {
                       {new Date(order.createdAt).toLocaleDateString()}
                     </span>
                   </div>
-                  <div className="order-status" style={{backgroundColor: getStatusColor(order.status)}}>
+                  <div className="order-status" style={{ backgroundColor: getStatusColor(order.status) }}>
                     {order.status}
                   </div>
                 </div>
@@ -83,7 +86,7 @@ const Orders = () => {
                   </div>
                   <div>
                     <p className="label">Total:</p>
-                    <p className="value" style={{fontWeight: 'bold', color: '#2e7d32'}}>
+                    <p className="value" style={{ fontWeight: 'bold', color: '#2e7d32' }}>
                       ₹{order.totalAmount}
                     </p>
                   </div>

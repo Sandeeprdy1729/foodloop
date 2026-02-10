@@ -25,7 +25,7 @@ const buyerSchema = new mongoose.Schema({
   },
   location: {
     type: String,
-    required: true
+    required: false
   },
   state: String,
   city: String,
@@ -49,6 +49,10 @@ const buyerSchema = new mongoose.Schema({
   },
   bankAccount: String,
   bankCode: String,
+  password: {
+    type: String,
+    required: false // Optional for guest checkout, but required for registered users
+  },
   createdAt: {
     type: Date,
     default: Date.now

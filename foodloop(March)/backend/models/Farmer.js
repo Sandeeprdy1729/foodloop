@@ -33,6 +33,10 @@ const farmerSchema = new mongoose.Schema({
   crops: [{
     type: String
   }],
+  password: {
+    type: String,
+    default: null
+  },
   bankAccount: String,
   bankCode: String,
   verified: {
