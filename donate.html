@@ -2,51 +2,193 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Donate surplus food to FoodLoop. Share food type, quantity, location and expiry so we can match your donation with people in need.">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Donate Surplus Food - FoodLoop">
+    <meta property="og:description" content="Turn excess food into meals for people in need. Donate with FoodLoop in a few simple steps.">
+    <meta property="og:image" content="pro earth.jpg">
     <title>Donation</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" href="favicon.svg" type="image/svg+xml">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&family=Figtree:wght@300..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css?v=11">
+    <script>document.documentElement.classList.add('js');</script>
+    <script src="data.js?v=11" defer></script>
+    <script src="app.js?v=11" defer></script>
 </head>
 <body>
-    
-    <nav>
-        <div class="logo">FoodLoop</div>
-        <ul>
-            <li><a href="indexh.html">Home</a></li>
-            <li><a href="donate.html">Donate</a></li>
-            <li><a href="market.html">Marketplace</a></li>
-            <li><a href="farmer.html">Farmer's Market</a></li>
-            <li><a href="recipients.html">Find Recipients</a></li>
-        </ul>
-    </nav>
-    <header>
-        <h1>Donate surplus Food</h1>
-        <p>Connecting excess food with those in need</p>
+    <a class="skip-link" href="#main-content">Skip to content</a>
+
+    <header class="site-header">
+        <nav class="site-nav" aria-label="Main navigation">
+            <a class="logo" href="index.html">
+                <img src="foodloop-logo.svg" alt="FoodLoop" width="150" height="36">
+            </a>
+            <button class="nav-toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="primary-menu">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+            </button>
+            <ul class="nav-menu" id="primary-menu">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="donate.html" aria-current="page">Donate</a></li>
+                <li><a href="market.html">Marketplace</a></li>
+                <li><a href="farmer.html">Farmer's Market</a></li>
+                <li><a href="recipients.html">Find Recipients</a></li>
+            </ul>
+            <button class="cart-badge" id="cart-button" type="button" aria-label="Open cart: 0 items" aria-haspopup="dialog">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="20" r="1"/><circle cx="18" cy="20" r="1"/><path d="M2 3h2l2.4 11.2a2 2 0 0 0 2 1.6h8.4a2 2 0 0 0 2-1.6L21 7H6"/></svg>
+                <span>Cart</span>
+                <span class="cart-count" data-cart-count aria-hidden="true">0</span>
+            </button>
+        </nav>
     </header>
-    <main>
-        <section id="donate" class="donation-form">
-            <form id="foodDonationform">
-                <label for="name" >Your Name:</label>
-                <input type="text" id="name" name="name" placeholder="Enter Your name"required>
 
-                <label for="foodType">Food Type:</label>
-                <input type="text" id="foodType" name="foodType" placeholder="e.g,fruits, bread" required>
+    <section class="page-banner">
+        <div class="container">
+            <h1>Donate surplus Food</h1>
+            <p>Connecting excess food with those in need</p>
+        </div>
+    </section>
 
-                <label for="quantity" >Quantity (kg):</label>
-                <input type="number" id="quantity" name="quantity" placeholder="e.g,1kg,2.7kg"required>
+    <main id="main-content" tabindex="-1">
+        <div class="container section">
+            <div class="donate-layout">
+                <div>
+                    <section id="donate" class="donation-form card" aria-labelledby="donate-title">
+                        <h2 id="donate-title">Share your donation</h2>
+                        <form id="foodDonationform" novalidate>
+                            <p class="demo-note">Demo form only — no real pickup is scheduled and no data leaves this browser.</p>
+                            <div class="form-grid">
+                                <div class="form-field">
+                                    <label for="name">Your name</label>
+                                    <input type="text" id="name" name="name" placeholder="Enter your name" aria-describedby="name-error" required>
+                                    <span class="field-error" id="name-error" role="alert"></span>
+                                </div>
+                                <div class="form-field">
+                                    <label for="contactNumber">Contact number</label>
+                                    <input type="tel" id="contactNumber" name="contactNumber" inputmode="tel" placeholder="10-digit phone number" aria-describedby="contactNumber-error" required>
+                                    <span class="field-error" id="contactNumber-error" role="alert"></span>
+                                </div>
+                                <div class="form-field">
+                                    <label for="email">Email (optional)</label>
+                                    <input type="email" id="email" name="email" placeholder="you@example.com" aria-describedby="email-error">
+                                    <span class="field-error" id="email-error" role="alert"></span>
+                                </div>
+                                <div class="form-field">
+                                    <label for="foodCategory">Food category</label>
+                                    <select id="foodCategory" name="foodCategory" aria-describedby="foodCategory-error" required>
+                                        <option value="">Choose a category</option>
+                                        <option value="Cooked food">Cooked food</option>
+                                        <option value="Fruits and vegetables">Fruits and vegetables</option>
+                                        <option value="Bakery">Bakery</option>
+                                        <option value="Dry staples">Dry staples</option>
+                                        <option value="Dairy">Dairy</option>
+                                    </select>
+                                    <span class="field-error" id="foodCategory-error" role="alert"></span>
+                                </div>
+                                <div class="form-field">
+                                    <label for="foodType">Food type and description</label>
+                                    <input type="text" id="foodType" name="foodType" placeholder="e.g. cooked rice and vegetables" aria-describedby="foodType-error" required>
+                                    <span class="field-error" id="foodType-error" role="alert"></span>
+                                </div>
+                                <div class="form-field form-field-split">
+                                    <label for="quantity">Quantity</label>
+                                    <input type="number" id="quantity" name="quantity" min="0.1" step="0.1" placeholder="e.g. 2.5" aria-describedby="quantity-error" required>
+                                    <span class="field-error" id="quantity-error" role="alert"></span>
+                                </div>
+                                <div class="form-field form-field-split">
+                                    <label for="unit">Unit</label>
+                                    <select id="unit" name="unit" aria-describedby="unit-error" required>
+                                        <option value="kg">kg</option>
+                                        <option value="litres">litres</option>
+                                        <option value="packets">packets</option>
+                                        <option value="meals">meals</option>
+                                    </select>
+                                    <span class="field-error" id="unit-error" role="alert"></span>
+                                </div>
+                                <div class="form-field">
+                                    <label for="location">Pickup location</label>
+                                    <input type="text" id="location" name="location" placeholder="e.g. Gachibowli, Hyderabad" aria-describedby="location-error" required>
+                                    <span class="field-error" id="location-error" role="alert"></span>
+                                </div>
+                                <div class="form-field form-field-split">
+                                    <label for="expiry">Food expiry date</label>
+                                    <input type="date" id="expiry" name="expiry" aria-describedby="expiry-error" required>
+                                    <span class="field-error" id="expiry-error" role="alert"></span>
+                                </div>
+                                <div class="form-field form-field-split">
+                                    <label for="expiryTime">Expiry time (optional)</label>
+                                    <input type="time" id="expiryTime" name="expiryTime" aria-describedby="expiryTime-error">
+                                    <span class="field-error" id="expiryTime-error" role="alert"></span>
+                                </div>
+                                <div class="form-field form-field-split">
+                                    <label for="pickupDate">Pickup date</label>
+                                    <input type="date" id="pickupDate" name="pickupDate" aria-describedby="pickupDate-error" required>
+                                    <span class="field-error" id="pickupDate-error" role="alert"></span>
+                                </div>
+                                <div class="form-field form-field-split">
+                                    <label for="pickupTime">Pickup time</label>
+                                    <input type="time" id="pickupTime" name="pickupTime" aria-describedby="pickupTime-error" required>
+                                    <span class="field-error" id="pickupTime-error" role="alert"></span>
+                                </div>
+                                <div class="form-field form-field-wide">
+                                    <label for="instructions">Pickup instructions (optional)</label>
+                                    <textarea id="instructions" name="instructions" rows="3" placeholder="Where should the volunteer collect it?"></textarea>
+                                </div>
+                                <div class="form-field form-field-wide form-check">
+                                    <input type="checkbox" id="consent" name="consent" aria-describedby="consent-error">
+                                    <label for="consent">I understand this is a demo and no real collection will be scheduled.</label>
+                                    <span class="field-error" id="consent-error" role="alert"></span>
+                                </div>
+                            </div>
+                            <div class="form-actions">
+                                <button class="btn" type="submit">Submit demo donation</button>
+                            </div>
+                        </form>
+                        <div id="thank-you" class="thank-you" hidden>
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="m8 12 3 3 5-6"/></svg>
+                            <h2>Thank you, <span id="thank-you-name">friend</span>!</h2>
+                            <p>Your demo donation is saved in this browser. No real pickup was scheduled.</p>
+                            <p>Demo status: <strong id="thank-you-status">Pending demo match</strong></p>
+                            <button class="btn" id="donate-again" type="button">Donate again</button>
+                        </div>
+                    </section>
 
-                <label for="location" >Location:</label>
-                <input type="text" id="location" name="location" placeholder="Delhi Hyderabad"required>
+                    <section class="history" aria-labelledby="history-title">
+                        <h2 id="history-title">Recent demo donations</h2>
+                        <p class="demo-note">Seeded examples and browser-saved entries. No real donations are processed.</p>
+                        <p id="history-empty" class="history-empty" hidden>No donations yet. Yours will appear here.</p>
+                        <ul id="donation-history"></ul>
+                    </section>
+                </div>
 
-                <label for="expiry">Expiry:</label>
-                <input type="date" id="expiry" name="expiry" placeholder="Enter Exp date" required>
-
-                <button type="submit">Submit Donation</button>
-            </form>
-        </section>
-
+                <aside class="card how-panel" aria-labelledby="how-title">
+                    <h2 id="how-title">How it works</h2>
+                    <ol class="how-steps">
+                        <li class="how-step">
+                            <div>
+                                <h3>Share the details</h3>
+                                <p>Tell us the food type, quantity, location and expiry date. Expiry time is optional.</p>
+                            </div>
+                        </li>
+                        <li class="how-step">
+                            <div>
+                                <h3>We find a match</h3>
+                                <p>We connect your surplus with a nearby NGO, shelter or kitchen.</p>
+                            </div>
+                        </li>
+                        <li class="how-step">
+                            <div>
+                                <h3>Food reaches someone</h3>
+                                <p>Your donation is collected and put to good use while it is still fresh.</p>
+                            </div>
+                        </li>
+                    </ol>
+                </aside>
+            </div>
+        </div>
     </main>
-    <footer>
-        <p>&copy; 2025 Food Donation. All rights recevied</p>
-    </footer>
+
 </body>
 </html>
