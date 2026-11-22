@@ -2,128 +2,139 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Find nearby NGOs, shelters, community kitchens and volunteers accepting food donations on the FoodLoop map.">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Find Recipients - FoodLoop">
+    <meta property="og:description" content="Discover organisations near you that can receive your surplus food donation.">
+    <meta property="og:image" content="pro earth.jpg">
     <title>Find Recipients</title>
+    <link rel="icon" href="favicon.svg" type="image/svg+xml">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&family=Figtree:wght@300..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <link rel="stylesheet" href="styles.css?v=11">
+    <script>document.documentElement.classList.add('js');</script>
+    <script src="data.js?v=11" defer></script>
+    <script src="app.js?v=11" defer></script>
 </head>
 <body>
-    
-    <nav>
-        <div class="logo">FoodLoop</div>
-        <ul>
-                <li><a href="indexh.html">Home</a></li>
+    <a class="skip-link" href="#main-content">Skip to content</a>
+
+    <header class="site-header">
+        <nav class="site-nav" aria-label="Main navigation">
+            <a class="logo" href="index.html">
+                <img src="foodloop-logo.svg" alt="FoodLoop" width="150" height="36">
+            </a>
+            <button class="nav-toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="primary-menu">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+            </button>
+            <ul class="nav-menu" id="primary-menu">
+                <li><a href="index.html">Home</a></li>
                 <li><a href="donate.html">Donate</a></li>
                 <li><a href="market.html">Marketplace</a></li>
                 <li><a href="farmer.html">Farmer's Market</a></li>
-                <li><a href="recipients.html">Find Recipients</a></li>
-        </ul>
-    </nav>
-    <header>
-        <h1>Find Recipients</h1>
-        <p>List of nearby NGO'S and Shelters</p>
+                <li><a href="recipients.html" aria-current="page">Find Recipients</a></li>
+            </ul>
+            <button class="cart-badge" id="cart-button" type="button" aria-label="Open cart: 0 items" aria-haspopup="dialog">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="20" r="1"/><circle cx="18" cy="20" r="1"/><path d="M2 3h2l2.4 11.2a2 2 0 0 0 2 1.6h8.4a2 2 0 0 0 2-1.6L21 7H6"/></svg>
+                <span>Cart</span>
+                <span class="cart-count" data-cart-count aria-hidden="true">0</span>
+            </button>
+        </nav>
     </header>
 
-    <main>
-        
-        <section class="dashboard">
-          <div class="dashboard-item">
-            <h3 id="ngos-count">0</h3>
-            <p>NGOs Connected</p>
-          </div>
-          <div class="dashboard-item">
-            <h3 id="restaurants-count">0</h3>
-            <p>Registered Restaurants</p>
-          </div>
-          <div class="dashboard-item">
-            <h3 id="volunteers-count">0</h3>
-            <p>Active Volunteers</p>
-          </div>
-          <div class="dashboard-item">
-            <h3 id="meals-saved">0</h3>
-            <p>Meals Saved Today</p>
-          </div>
-        </section>
-    
-        <section>
-          <h2>Nearby Recipients</h2>
-          <div id="map"></div>
-        </section>
+    <section class="page-banner">
+        <div class="container">
+            <h1>Find Recipients</h1>
+            <p>Nearby NGOs, shelters, community kitchens and volunteers.</p>
+        </div>
+    </section>
 
-        <section>
-            <h2>Recipients Near You</h2>
-            <ul id="recipients-list">
-                <!--RECIPIENTS dynamically added-->
+    <main id="main-content" tabindex="-1">
+        <div class="container section">
+            <p class="demo-note">Demo recipients and activity figures — map locations and contacts are illustrative.</p>
 
-            </ul>
+            <section class="stats" aria-label="Demo activity">
+                <div class="dashboard-item">
+                    <p class="stat-number" id="ngos-count" data-count="2">2</p>
+                    <p data-singular="NGO Connected" data-plural="NGOs Connected">NGOs Connected</p>
+                </div>
+                <div class="dashboard-item">
+                    <p class="stat-number" id="restaurants-count" data-count="1">1</p>
+                    <p data-singular="Registered Restaurant" data-plural="Registered Restaurants">Registered Restaurant</p>
+                </div>
+                <div class="dashboard-item">
+                    <p class="stat-number" id="volunteers-count" data-count="1">1</p>
+                    <p data-singular="Active Volunteer" data-plural="Active Volunteers">Active Volunteer</p>
+                </div>
+                <div class="dashboard-item">
+                    <p class="stat-number" id="meals-saved" data-count="120">120</p>
+                    <p data-singular="Meal Saved Today" data-plural="Meals Saved Today">Meals Saved Today</p>
+                </div>
+            </section>
 
-        <section>
-          <h2>Recipients List</h2>
-          <ul id="recipient-list">
-            <!-- Recipients will be dynamically added here -->
-          </ul>
-        </section>
-      </main>
-    <main>
-        
-         
-        </section>
+            <section class="recipients-section" aria-labelledby="recipients-title">
+                <div class="section-head">
+                    <h2 id="recipients-title">Nearby Recipients</h2>
+                    <p>Choose a marker on the map or a name in the list to see more.</p>
+                </div>
 
-        <footer>
-            <p>&copy; 2025 Find Recipients All rights recevied.</p>
-        </footer>
+                <div class="search-filter" role="group" aria-label="Search recipients">
+                    <label class="sr-only" for="recipient-search">Search recipients</label>
+                    <input type="search" id="recipient-search" placeholder="Search by name, area or need...">
+                </div>
+
+                <div class="filter-chips filter-row" role="group" aria-label="Filter recipients by type">
+                    <button class="chip" type="button" data-type-filter="all" aria-pressed="true">All</button>
+                    <button class="chip" type="button" data-type-filter="ngo" aria-pressed="false">NGO</button>
+                    <button class="chip" type="button" data-type-filter="shelter" aria-pressed="false">Shelter</button>
+                    <button class="chip" type="button" data-type-filter="kitchen" aria-pressed="false">Kitchen</button>
+                    <button class="chip" type="button" data-type-filter="volunteer" aria-pressed="false">Volunteer</button>
+                </div>
+
+                <p id="recipient-empty" class="empty-state" hidden>No recipients match that search or filter.</p>
+
+                <div class="recipients-layout">
+                    <div class="map-column">
+                        <div id="map" role="application" aria-label="Map of nearby demo food recipients"></div>
+                        <ul class="map-legend" aria-label="Marker colour legend">
+                            <li><span class="type-dot" style="--dot: var(--type-ngo)"></span> NGO</li>
+                            <li><span class="type-dot" style="--dot: var(--type-shelter)"></span> Shelter</li>
+                            <li><span class="type-dot" style="--dot: var(--type-kitchen)"></span> Kitchen</li>
+                            <li><span class="type-dot" style="--dot: var(--type-volunteer)"></span> Volunteer</li>
+                        </ul>
+                    </div>
+                    <div class="recipients-panel">
+                        <h3>Recipients Near You</h3>
+                        <p class="panel-caption">Select a recipient for details</p>
+                        <ul id="recipient-list" class="recipient-list"></ul>
+                    </div>
+                </div>
+            </section>
+        </div>
     </main>
 
-    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-  <script>
-    
-    const recipients = [
-      { name: 'Community Shelter', type: 'NGO', location: [12.9716, 77.5946] },
-      { name: 'Food Bank NGO', type: 'NGO', location: [12.9352, 77.6245] },
-      { name: 'Local Kitchen', type: 'Restaurant', location: [12.9569, 77.5768] },
-      { name: 'Helping Hands', type: 'Volunteer Group', location: [12.9418, 77.5647] },
-    ];
+    <dialog id="recipient-dialog" aria-labelledby="recipient-dialog-name">
+        <div class="dialog-body recipient-dialog-body">
+            <h2 id="recipient-dialog-name"></h2>
+            <p id="recipient-dialog-type"></p>
+            <dl class="recipient-detail-grid">
+                <div><dt>Needs</dt><dd id="recipient-dialog-needs"></dd></div>
+                <div><dt>Hours</dt><dd id="recipient-dialog-hours"></dd></div>
+                <div><dt>Capacity</dt><dd id="recipient-dialog-capacity"></dd></div>
+            </dl>
+            <p id="recipient-dialog-description"></p>
+            <p class="demo-note">Demo contact details only — no real message is sent.</p>
+            <div class="cart-actions">
+                <a class="btn" id="recipient-contact-link" href="mailto:hello@foodloop.demo">Email demo contact</a>
+                <button class="btn btn-secondary" id="recipient-contact" type="button">Prepare demo email</button>
+                <button class="btn btn-secondary" id="recipient-map" type="button">View on map</button>
+                <button class="btn btn-secondary" id="recipient-close" type="button">Close</button>
+            </div>
+        </div>
+    </dialog>
 
-    
-    const map = L.map('map').setView([12.9716, 77.5946], 12); // Default center (e.g., Bangalore)
-
-    
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-    }).addTo(map);
-
-    
-    recipients.forEach(recipient => {
-      const marker = L.marker(recipient.location).addTo(map);
-      marker.bindPopup(`<strong>${recipient.name}</strong><br>Type: ${recipient.type}`);
-    });
-
-    
-    function updateDashboard() {
-      const ngos = recipients.filter(r => r.type === 'NGO').length;
-      const restaurants = recipients.filter(r => r.type === 'Restaurant').length;
-      const volunteers = recipients.filter(r => r.type === 'Volunteer Group').length;
-      const mealsSaved = 120; // Example data (can be fetched from backend)
-
-      document.getElementById('ngos-count').textContent = ngos;
-      document.getElementById('restaurants-count').textContent = restaurants;
-      document.getElementById('volunteers-count').textContent = volunteers;
-      document.getElementById('meals-saved').textContent = mealsSaved;
-    }
-
-    
-    function displayRecipients() {
-      const recipientList = document.getElementById('recipient-list');
-      recipients.forEach(recipient => {
-        const li = document.createElement('li');
-        li.innerHTML = `<strong>${recipient.name}</strong><br>Type: ${recipient.type}`;
-        recipientList.appendChild(li);
-      });
-    }
-
-
-    updateDashboard();
-    displayRecipients();
-  </script>
 </body>
 </html>

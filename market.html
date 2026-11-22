@@ -2,102 +2,81 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Shop the FoodLoop marketplace for upcycled products made from surplus food, from fruit jam to biodegradable plates.">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Marketplace - FoodLoop">
+    <meta property="og:description" content="Discover upcycled products that give surplus food a second life.">
+    <meta property="og:image" content="jam.jpg">
     <title>Market Place</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" href="favicon.svg" type="image/svg+xml">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&family=Figtree:wght@300..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css?v=11">
+    <script>document.documentElement.classList.add('js');</script>
+    <script src="data.js?v=11" defer></script>
+    <script src="app.js?v=11" defer></script>
 </head>
 <body>
-    <nav>
-        <div class="logo">FoodLoop</div>
-            <ul>
-                <li><a href="indexh.html">Home</a></li>
+    <a class="skip-link" href="#main-content">Skip to content</a>
+
+    <header class="site-header">
+        <nav class="site-nav" aria-label="Main navigation">
+            <a class="logo" href="index.html">
+                <img src="foodloop-logo.svg" alt="FoodLoop" width="150" height="36">
+            </a>
+            <button class="nav-toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="primary-menu">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+            </button>
+            <ul class="nav-menu" id="primary-menu">
+                <li><a href="index.html">Home</a></li>
                 <li><a href="donate.html">Donate</a></li>
-                <li><a href="market.html">Marketplace</a></li>
+                <li><a href="market.html" aria-current="page">Marketplace</a></li>
                 <li><a href="farmer.html">Farmer's Market</a></li>
                 <li><a href="recipients.html">Find Recipients</a></li>
             </ul>
-    </nav>
-    <header>
-        <h1>MarketPlace</h1>
+            <button class="cart-badge" id="cart-button" type="button" aria-label="Open cart: 0 items" aria-haspopup="dialog">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="20" r="1"/><circle cx="18" cy="20" r="1"/><path d="M2 3h2l2.4 11.2a2 2 0 0 0 2 1.6h8.4a2 2 0 0 0 2-1.6L21 7H6"/></svg>
+                <span>Cart</span>
+                <span class="cart-count" data-cart-count aria-hidden="true">0</span>
+            </button>
+        </nav>
     </header>
 
-    <section id="marketplace" class="marketplace">
-        <h2>Upcycled Products</h2>
-        <div class="product-grid">
-          <div class="product-card">
-            <img src="jam.jpg" alt="Upcycled Product">
-            <h3>Fruit Jam</h3>
-            <p>Made from overripe fruits. Saved 5kg of waste!</p>
-            <button>Buy Now</button>
-          </div>
-          <div class="product-card">
-            <img src="chips.jpg" alt="Upcycled Product">
-            <h3>Veggie Chips</h3>
-            <p>Made from vegetable peels. Saved 3kg of waste!</p>
-            <button>Buy Now</button>
-          </div>
-          <div class="product-card">
-            <img src="skin.jpg" alt="Upcycled Product">
-            <h3>Skin Care Products</h3>
-            <p>Made from banana,orange peels. Saved 2kg of waste!</p>
-            <button>Buy Now</button>
-          </div>
-          <div class="product-card">
-            <img src="vegan.jpg" alt="Upcycled Product">
-            <h3>Vegan Leather</h3>
-            <p>Made from Pineapple leaves. Saved 2kg of waste!</p>
-            <button>Buy Now</button>
-          </div>
-          <div class="product-card">
-            <img src="carbon.jpg" alt="Upcycled Product">
-            <h3>Carbon-Negative Concrete</h3>
-            <p>Made from banana peels,rice husks. Saved 4kg of waste!</p>
-            <button>Buy Now</button>
-          </div>
-          <div class="product-card">
-            <img src="cutlery.jpg" alt="Upcycled Product">
-            <h3>Biodegradable cutlery</h3>
-            <p>Made from food waste. Saved 2kg of waste!</p>
-            <button>Buy Now</button>
-          </div>
-          <div class="product-card">
-            <img src="dyes.jpg" alt="Upcycled Product">
-            <h3>Natural Dyes</h3>
-            <p>Made from beetroot,carrot,spinach. Saved 1kg of waste!</p>
-            <button>Buy Now</button>
-          </div>
-          <div class="product-card">
-            <img src="vinegar.jpg" alt="Upcycled Product">
-            <h3>Vinegar</h3>
-            <p>Made from apple peels. Saved 4kg of waste!</p>
-            <button>Buy Now</button>
-          </div>
-          <div class="product-card">
-            <img src="toy.jpg" alt="Upcycled Product">
-            <h3>Biodegradable Toys</h3>
-            <p>Made from coconut peanut and almond shells. Saved 5kg of waste!</p>
-            <button>Buy Now</button>
-          </div>
-          <div class="product-card">
-            <img src="tablet.jpg" alt="Upcycled Product">
-            <h3>Water Purification Tablets</h3>
-            <p>Made from apple pomance,moringa seeds. Saved 2.5kg of waste!</p>
-            <button>Buy Now</button>
-          </div>
-          <div class="product-card">
-            <img src="natural colours.jpeg" alt="Upcycled Product">
-            <h3>Organic colours</h3>
-            <p>Made from  cornstarch and Natural dyes</p>
-            <button>Buy Now</button>
-          </div>
-          <div class="product-card">
-            <img src="plates .jpeg" alt="Upcycled Product">
-            <h3>Natural Disposable Plates</h3>
-            <p>Made from Banana leaves & teak leaves</p>
-            <button>Buy Now</button>
-          </div>
+    <section class="page-banner">
+        <div class="container">
+            <h1>MarketPlace</h1>
+            <p>Discover upcycled goods made from food that would otherwise go to waste.</p>
         </div>
-      </section>
+    </section>
+
+    <main id="main-content" tabindex="-1">
+        <section id="marketplace" class="section container marketplace" aria-labelledby="products-title">
+            <div class="section-head">
+                <h2 id="products-title">Upcycled Products</h2>
+                <p>Every purchase helps save food from the bin.</p>
+                <p class="demo-note">Demo catalogue with illustrative products, images and prices.</p>
+            </div>
+
+            <div class="filter-row" role="group" aria-label="Filter products by category">
+                <button class="chip" type="button" data-filter="all" aria-pressed="true">All</button>
+                <button class="chip" type="button" data-filter="food" aria-pressed="false">Food</button>
+                <button class="chip" type="button" data-filter="home" aria-pressed="false">Home</button>
+                <button class="chip" type="button" data-filter="lifestyle" aria-pressed="false">Lifestyle</button>
+                <button class="chip" type="button" data-filter="materials" aria-pressed="false">Materials</button>
+            </div>
+
+            <div id="product-grid" class="product-grid"></div>
+        </section>
+
+        <section id="order-history" class="section container history" aria-labelledby="orders-title">
+            <h2 id="orders-title">Demo order history</h2>
+            <p class="demo-note">Orders placed through the demo checkout are saved only in this browser.</p>
+            <p id="order-empty" class="history-empty">No demo orders yet.</p>
+            <ul id="order-list"></ul>
+        </section>
+    </main>
 
 </body>
 </html>
